@@ -1,0 +1,10 @@
+.field {
+  border: solid 1px grey;
+}
+.searchForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  text-align: left;
+}

@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  border: solid 1 px black;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+  margin-bottom: 15px;
+}
+.field {
+  height: 20px;
+  border: solid 1px grey;
+}
+.button {
+  background-color: lightgrey;
+  border: solid 1px grey;
+  border-radius: 5px;
+  width: 140px;
+  height: 40px;
+  font-size: 16px;
+}
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+span {
+  color: red;
+  font-size: 12px;
+}
