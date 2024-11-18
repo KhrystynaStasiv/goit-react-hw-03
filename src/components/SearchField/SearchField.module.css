@@ -1,10 +1,7 @@
-.field {
-  border: solid 1px grey;
-}
-.searchForm {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 10px;
+.search-box {
+  max-width: 375px;
   text-align: left;
+}
+.search-box input {
+  border: 1 px black;
 }

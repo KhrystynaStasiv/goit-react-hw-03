@@ -14,12 +14,11 @@ const ContactForm = (onAdd) => {
   };
   const handleSubmit = (values, actions) => {
     console.log(values);
-    actions.resetForm();
-    e.preventDefault();
     onAdd({
       name: values.username,
       number: values.phoneNumber,
     });
+    actions.resetForm();
   };
 
   const nameFieldId = useId();

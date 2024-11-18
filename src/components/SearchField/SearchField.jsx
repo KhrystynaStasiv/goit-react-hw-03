@@ -1,25 +1,15 @@
-import { Formik, Form, Field } from "formik";
-import s from "./SearchField.module.css";
-import { useId } from "react";
+import css from "./SearchField.module.css";
 
-const SearchField = () => {
-  const handleSubmit = (values, actions) => {
-    console.log(values);
-    actions.resetForm();
-  };
-  const initialValues = {
-    searchField: "",
-  };
+const SearchField = ({ value, onFilter }) => {
   return (
-    <div>
-      <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-        <Form className={s.searchForm}>
-          <label>Find contacts by name</label>
-          <Field className={s.field} type="text" name="searchField" />
-        </Form>
-      </Formik>
+    <div className={css["search-box"]}>
+      <p className={css.text}>Find contacts by name</p>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onFilter(e.target.value)}
+      />
     </div>
   );
 };
-
 export default SearchField;

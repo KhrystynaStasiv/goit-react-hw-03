@@ -35,6 +35,9 @@ h1 {
   line-height: 1.1;
   text-align: left;
 }
+ul {
+  list-style-type: none;
+}
 
 button {
   border-radius: 8px;
@@ -43,8 +46,9 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: lightgrey;
   cursor: pointer;
+  border: solid 1 px grey;
   transition: border-color 0.25s;
 }
 button:hover {
