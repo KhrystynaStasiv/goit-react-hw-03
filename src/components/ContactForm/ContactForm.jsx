@@ -3,52 +3,65 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useId } from "react";
 
-const ContactForm = (onAdd) => {
-  const fromValidation = Yup.object().shape({
-    username: Yup.string().required("Required"),
-    phoneNumber: Yup.string().required("Required").min(7, "Too short"),
-  });
-  const initialValues = {
-    username: "",
-    phoneNumber: "",
-  };
+const initialValues = {
+  contactName: "",
+  phoneNumber: "",
+};
+
+const FeedbackSchema = Yup.object().shape({
+  contactName: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  phoneNumber: Yup.string().required("Required").min(7, "Too short"),
+});
+
+const ContactForm = ({ onAdd }) => {
+  const idName = useId();
+  const idPhone = useId();
+
   const handleSubmit = (values, actions) => {
     console.log(values);
     onAdd({
-      name: values.username,
+      name: values.contactName,
       number: values.phoneNumber,
     });
     actions.resetForm();
   };
 
-  const nameFieldId = useId();
-  const phoneNumberFieldId = useId();
+  // const nameFieldId = useId();
+  // const phoneNumberFieldId = useId();
 
   return (
     <Formik
       onSubmit={handleSubmit}
       initialValues={initialValues}
-      validationSchema={fromValidation}
+      validationSchema={FeedbackSchema}
     >
       <Form className={s.form}>
         <div>
           <div className={s.wrapper}>
-            <label htmlFor={nameFieldId}>Name</label>
+            <label htmlFor={idName}>Name</label>
             <Field
               className={s.field}
-              name="username"
+              name="contactName"
               type="text"
-              id={nameFieldId}
+              id={idName}
+            />
+            <ErrorMessage
+              name="contactName"
+              component="span"
+              className={s.error}
             />
           </div>
 
           <div className={s.wrapper}>
-            <label htmlFor={phoneNumberFieldId}>Number</label>
+            <label htmlFor={idPhone}>Number</label>
             <Field
               className={s.field}
               name="phoneNumber"
               type="text"
-              id={phoneNumberFieldId}
+              id={idPhone}
             />
             <ErrorMessage
               className={s.error}

@@ -8,7 +8,7 @@ const Contact = ({ id, name, number, onDelete }) => {
         <div className={s.info}>
           <div className={s.contactName}>
             <FaUserAlt />
-            <p>{name}</p>
+            <p className={s.name}>{name}</p>
           </div>
           <div className={s.contactNumber}>
             <FaPhoneAlt />
