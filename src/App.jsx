@@ -1,20 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import initialContacts from "../contacts.json";
 import "./App.css";
-import SearchField from "./components/SearchField/SearchField";
+import SearchBox from "./components/SearchBox/SearchBox";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
+import { nanoid } from "nanoid";
 
 function App() {
-  const [contacts, setContacts] = useState(initialContacts);
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem("contacts");
+    return savedContacts ? JSON.parse(savedContacts) : initialContacts;
+  });
+
   const [filter, setFilter] = useState("");
 
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
+
   const addContact = (newContact) => {
+    console.log("Adding new contact:", newContact);
+    // const newContact = {
+    //   id: nanoid(),
+    //   name: newContactName,
+    // };
     setContacts((prevContacts) => {
       return [...prevContacts, newContact];
     });
   };
 
+  const visibleContacts = contacts.filter(
+    (contact) =>
+      contact.name &&
+      typeof contact.name === "string" &&
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
   const deleteContact = (contactId) => {
     console.log(contactId);
     setContacts((prevContacts) => {
@@ -22,15 +42,11 @@ function App() {
     });
   };
 
-  const visibleContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
-
   return (
     <>
       <h1>Phonebook</h1>
       <ContactForm onAdd={addContact} />
-      <SearchField value={filter} onFilter={setFilter} />
+      <SearchBox value={filter} onFilter={setFilter} />
       <ContactList contacts={visibleContacts} onDelete={deleteContact} />
     </>
   );
